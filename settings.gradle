@@ -1,0 +1,6 @@
+rootProject.name = 'com.aliez'
+rootProject.name = 'com.aliez'
+rootProject.name = 'zelda'
+include 'bootstrap'
+include 'common'
+

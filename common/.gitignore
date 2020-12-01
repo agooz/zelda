@@ -1,0 +1,29 @@
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+/apache-maven-3.5.3/
+/out/
+.idea
+build/
+src/main/resources/debug.properties
+null/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
