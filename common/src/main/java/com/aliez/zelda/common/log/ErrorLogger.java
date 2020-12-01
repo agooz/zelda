@@ -6,21 +6,22 @@ import org.apache.log4j.Logger;
 
 /**
  * @author: z.j.
- * @time: 2020-12-01 10:05
+ * @time: 2020-12-01 10:24
  */
-public class DebugLogger extends AbstractLogger{
+public class ErrorLogger extends AbstractLogger{
 
-    public DebugLogger(LoggerResources res) throws LoggerException {
-        this.createDebugLogger(res);
+
+    public ErrorLogger(LoggerResources res) throws LoggerException{
+        this.createErrorLogger(res);
     }
 
-    private void createDebugLogger(LoggerResources res) throws LoggerException{
+    public void createErrorLogger(LoggerResources res) throws LoggerException{
         this.logger = Logger.getLogger(res.getLoggerName());
         this.logger.removeAllAppenders();
 
+
         MyPatternLayout layout = new MyPatternLayout();
         layout.SetHeader(res.getHeader());
-
         /**
          * %m：输出代码中指定的消息。
          * %p：输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL。如果是调用debug()输出的，则为DEBUG，依此类推
@@ -33,7 +34,6 @@ public class DebugLogger extends AbstractLogger{
          */
 
         layout.setConversionPattern("[%d{yyyy-MM-dd HH:mm:ss S}] %l %m%n");
-
         MyRollingFileAppender da = null;
 
         try {
@@ -41,32 +41,16 @@ public class DebugLogger extends AbstractLogger{
             da.setMaxBackupIndex(res.getMaxBackupIndex());
             da.setMaxFileSize(res.getMaxFileSize());
             this.logger.addAppender(da);
-            this.logger.setLevel(Level.DEBUG);
+            this.logger.setLevel(Level.ERROR);
         } catch (Exception e) {
             throw new LoggerException(e);
         }
     }
 
-
-
     @Override
     public void Log(String msg) {
-        this.logger.debug(msg);
+        this.logger.error(msg);
     }
 
-    public static void main(String[] args) throws Exception {
-        LoggerResources res = new LoggerResources();
-        res.setLogFile("/Users/aliez/Desktop/logtest/debug.log");
-        res.setMaxFileSize("1kb");
-        res.setLoggerName("debug");
-        res.setMaxBackupIndex(3);
-        res.setMaxFileSize("1kb");
 
-        DebugLogger logger = new DebugLogger(res);
-
-        for(int i = 0; i < 1000; ++i) {
-            logger.Log("ok");
-        }
-
-    }
 }
